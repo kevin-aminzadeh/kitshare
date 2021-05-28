@@ -3,14 +3,6 @@
   "version": "1.0.0",
   "description": "Rentr",
   "main": "server.js",
-  "per-env": {
-    "development": {
-      "DB_NAME": "rentr-db",
-      "DB_USER": "root",
-      "DB_PASSWORD": "root"
-    },
-    "production": {}
-  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -30,8 +22,8 @@
   "dependencies": {
     "express": "^4.16.3",
     "express-session": "^1.17.2",
+    "if-env": "^1.0.4",
     "mysql2": "^2.2.5",
-    "per-env": "^1.0.2",
     "sequelize": "^6.6.2"
   }
 }
