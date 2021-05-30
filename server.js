@@ -26,3 +26,5 @@ if (process.env.NODE_ENV !== "test") {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
   });
 }
+
+module.exports = app;
