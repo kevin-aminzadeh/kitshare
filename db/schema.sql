@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS kitshare_db;
+
+CREATE DATABASE kitshare_db;
