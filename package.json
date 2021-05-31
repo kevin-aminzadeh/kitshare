@@ -1,7 +1,7 @@
 {
-  "name": "rentr",
+  "name": "Kitshare",
   "version": "1.0.0",
-  "description": "Rentr",
+  "description": "Kitshare",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -19,17 +19,19 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "eslint": "^7.27.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^24.9.0",
     "nodemon": "^1.18.7",
     "prettier": "^2.3.0",
     "supertest": "^6.1.3"
   },
   "dependencies": {
-    "bootstrap": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.17.2",
     "if-env": "^1.0.4",
