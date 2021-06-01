@@ -1,10 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListingCard from '../../listingCard/ListingCard';
+import API from '../../../utils/API';
 
 function Listings() {
+  const [listingsState, setListingsState] = useState([]);
+
+  const renderListings = () => {
+    if (listingsState.length) {
+      const listingCards = listingsState.map((listing) => (
+        <div className="col-12 col-md-4" key={listing.id}>
+          <ListingCard
+            title={listing.title}
+            ratingScore={4.6}
+            ratingCount={13}
+            price={listing.price}
+            priceInterval="day"
+            currencyCode="AUD"
+            currencySymb="$"
+            distanceCount={13}
+            distanceUnit="km"
+            url="/listings/1"
+            key={listing.id}
+          />
+        </div>
+      ));
+      return listingCards;
+    }
+    return (
+      <div className="col">
+        <p className="lead">No listings were found</p>
+      </div>
+    );
+  };
+
+  // ComponentDidMount
   useEffect(() => {
     document.title = `Explore | Kitshare`;
+    API.getAllListings().then((res) => {
+      setListingsState([...res]);
+    });
   }, []);
+
   return (
     <div className="container my-4 pb-5" id="listings">
       <div className="row px-3 mb-2">
@@ -13,92 +49,7 @@ function Listings() {
         </div>
       </div>
       <ul className="list-group list-group-flush">
-        <div className="row">
-          <div className="col-12 col-md-4 ">
-            <ListingCard
-              title="Canon 5D Mark IV"
-              ratingScore={4.6}
-              ratingCount={13}
-              price={130}
-              priceInterval="day"
-              currencyCode="AUD"
-              currencySymb="$"
-              distanceCount={13}
-              distanceUnit="km"
-              url="/listings/1"
-            />
-          </div>
-          <div className="col-12 col-md-4 ">
-            <ListingCard
-              title="Canon 5D Mark IV"
-              ratingScore={4.6}
-              ratingCount={13}
-              price={130}
-              priceInterval="day"
-              currencyCode="AUD"
-              currencySymb="$"
-              distanceCount={13}
-              distanceUnit="km"
-              url="/listings/1"
-            />
-          </div>
-          <div className="col-12 col-md-4 ">
-            <ListingCard
-              title="Canon 5D Mark IV"
-              ratingScore={4.6}
-              ratingCount={13}
-              price={130}
-              priceInterval="day"
-              currencyCode="AUD"
-              currencySymb="$"
-              distanceCount={13}
-              distanceUnit="km"
-              url="/listings/1"
-            />
-          </div>
-          <div className="col-12 col-md-4 ">
-            <ListingCard
-              title="Canon 5D Mark IV"
-              ratingScore={4.6}
-              ratingCount={13}
-              price={130}
-              priceInterval="day"
-              currencyCode="AUD"
-              currencySymb="$"
-              distanceCount={13}
-              distanceUnit="km"
-              url="/listings/1"
-            />
-          </div>
-          <div className="col-12 col-md-4 ">
-            <ListingCard
-              title="Canon 5D Mark IV"
-              ratingScore={4.6}
-              ratingCount={13}
-              price={130}
-              priceInterval="day"
-              currencyCode="AUD"
-              currencySymb="$"
-              distanceCount={13}
-              distanceUnit="km"
-              url="/listings/1"
-            />
-          </div>
-          <div className="col-12 col-md-4 ">
-            <ListingCard
-              title="Canon 5D Mark IV"
-              ratingScore={4.6}
-              ratingCount={13}
-              price={130}
-              priceInterval="day"
-              currencyCode="AUD"
-              currencySymb="$"
-              distanceCount={13}
-              distanceUnit="km"
-              url="listings/1"
-            />
-          </div>
-        </div>
+        <div className="row">{renderListings()}</div>
       </ul>
     </div>
   );
