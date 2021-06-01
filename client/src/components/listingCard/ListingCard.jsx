@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ImageCard from '../imageCard/ImageCard';
 
 function ListingCard({
+  id,
   title,
   ratingScore,
   ratingCount,
@@ -42,7 +43,7 @@ function ListingCard({
                 aria-label="Slide 3"
               />
             </div>
-            <Link className="text-decoration-none text-dark" to={url}>
+            <Link className="text-decoration-none text-dark" to={`/listings/${id}`}>
               <div className="carousel-inner h-100">
                 <div className="carousel-item h-100 active">
                   <ImageCard isSquare={false} />
@@ -95,6 +96,7 @@ function ListingCard({
 }
 
 ListingCard.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   ratingScore: PropTypes.number.isRequired,
   ratingCount: PropTypes.number.isRequired,

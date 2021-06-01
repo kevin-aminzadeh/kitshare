@@ -10,6 +10,7 @@ function Listings() {
       const listingCards = listingsState.data.map((listing) => (
         <div className="col-12 col-md-4" key={listing.id}>
           <ListingCard
+            id={listing.id}
             title={listing.title}
             ratingScore={4.6}
             ratingCount={13}
@@ -19,7 +20,6 @@ function Listings() {
             currencySymb="$"
             distanceCount={13}
             distanceUnit="km"
-            url="/listings/1"
             key={listing.id}
           />
         </div>
