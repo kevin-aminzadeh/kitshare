@@ -1,12 +1,12 @@
 const sequelize = require('../config/connection');
-const seedBooking = require('./bookingData');
-const seedListing = require('./listingData');
-const seedLocation = require('./locationData');
-const seedPaymentMethod = require('./paymentMethodData');
-const seedPriceInterval = require('./priceIntervalData');
-const seedStatus = require('./statusData');
-const seedUser = require('./userData');
-const seedUserRole = require('./userRoleData');
+const seedBooking = require('./seedBooking');
+const seedListing = require('./seedListing');
+const seedLocation = require('./seedLocation');
+const seedPaymentMethod = require('./seedPaymentMethod');
+const seedPriceInterval = require('./seedPriceInterval');
+const seedStatus = require('./seedStatus');
+const seedUser = require('./seedUser');
+const seedUserRole = require('./seedUserRole');
 
 const seedAll = async () => {
   await sequelize.sync({ force: false });
