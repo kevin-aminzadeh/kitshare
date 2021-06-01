@@ -5,7 +5,7 @@ export default {
   getAllListings: async () => {
     const response = await axios.get(`/api/listings`);
     const listingsData = response.data;
-    return listingsData;
+    return { data: listingsData, meta: { count: listingsData.length } };
   },
 
   // Save Book To Database
