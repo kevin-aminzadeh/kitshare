@@ -3,11 +3,11 @@ import ListingCard from '../../listingCard/ListingCard';
 import API from '../../../utils/API';
 
 function Listings() {
-  const [listingsState, setListingsState] = useState([]);
+  const [listingsState, setListingsState] = useState({});
 
   const renderListings = () => {
-    if (listingsState.length) {
-      const listingCards = listingsState.map((listing) => (
+    if (Object.keys(listingsState).length) {
+      const listingCards = listingsState.data.map((listing) => (
         <div className="col-12 col-md-4" key={listing.id}>
           <ListingCard
             title={listing.title}
@@ -37,7 +37,7 @@ function Listings() {
   useEffect(() => {
     document.title = `Explore | Kitshare`;
     API.getAllListings().then((res) => {
-      setListingsState([...res]);
+      setListingsState({ ...res });
     });
   }, []);
 
