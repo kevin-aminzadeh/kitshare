@@ -11,15 +11,39 @@ Listing.init(
       allowNull: false,
       primaryKey: true,
     },
-    content: {
+    title: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    price_interval_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'priceInterval',
+        key: 'id',
+      },
     },
     owner_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: 'user',
+        key: 'id',
+      },
+    },
+    location_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'location',
         key: 'id',
       },
     },
