@@ -14,7 +14,6 @@ function ListingCard({
   currencyCode,
   currencySymb,
   priceInterval,
-  url,
 }) {
   return (
     <li className="list-group-item border-0 mb-2 px-0 flex-fill">
@@ -59,7 +58,7 @@ function ListingCard({
           </div>
         </div>
       </div>
-      <Link className="text-decoration-none text-dark" to={url}>
+      <Link className="text-decoration-none text-dark" to={`/listings/${id}`}>
         <div className="row mt-1">
           <div className="col">
             <p className="subtitle mb-1">
@@ -106,7 +105,6 @@ ListingCard.propTypes = {
   currencyCode: PropTypes.string.isRequired,
   currencySymb: PropTypes.string.isRequired,
   priceInterval: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
 };
 
 export default ListingCard;
