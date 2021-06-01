@@ -57,11 +57,11 @@ User.init(
       allowNull: false,
       defaultValue: false,
     },
-    user_type_id: {
+    role_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: 'userType',
+        model: 'userRole',
         key: 'id',
       },
     },
