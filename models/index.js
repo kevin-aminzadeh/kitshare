@@ -96,4 +96,13 @@ Listing.belongsTo(Location, {
   foreignKey: 'location_id',
 });
 
-module.exports = { Listing };
+module.exports = {
+  Booking,
+  Listing,
+  Location,
+  PaymentMethod,
+  PriceInterval,
+  Status,
+  User,
+  UserRole,
+};
