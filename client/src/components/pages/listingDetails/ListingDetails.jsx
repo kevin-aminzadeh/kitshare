@@ -1,10 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker } from 'react-dates';
+import moment from 'moment';
 import AvatarImage from '../../avatarImage/AvatarImage';
+import API from '../../../utils/API';
 
 function ListingDetails() {
-  useEffect(() => {
+  const [listing, setListing] = useState({});
+  const [listingOwner, setListingOwner] = useState({});
+  const [dates, setDates] = useState({ startDate: null, endDate: null });
+  const defaultFocusedInput = 'startDate';
+  const [focusedInput, setFocusedInput] = useState(defaultFocusedInput);
+
+  const params = useParams();
+
+  const fetchlistingData = async () => {
+    const listingData = await API.getListingbyId(params.id);
+    setListing(listingData);
+    setListingOwner(listingData.owner);
+  };
+
+  useEffect(async () => {
     document.title = `Canon 5D Mark IV | Kitshare`;
-  });
+
+    await fetchlistingData();
+  }, []);
+
   return (
     <div className="container mt-5 pb-5">
       <div id="listingDetails">
@@ -54,18 +77,22 @@ function ListingDetails() {
           <div className="col">
             <div className="row">
               <div className="col" />
-              <h1>Canon 5D Mark IV</h1>
+              <h1>{listing.title}</h1>
             </div>
             <div className="row">
               <div className="col">
-                <h2 className="fs-6 fw-normal text-muted">Seacombe Heights, South Australia</h2>
+                {Object.keys(listing) && (
+                  <h2 className="fs-6 fw-normal text-muted">Seacombe Heights, South Australia</h2>
+                )}
               </div>
             </div>
             <div className="row">
               <div className="col">
-                <h3 className="fs-5 fw-bold">
-                  $130 AUD <span className="fw-normal">/ Day</span>
-                </h3>
+                {Object.keys(listing) && (
+                  <h3 className="fs-5 fw-bold">
+                    ${listing.price} AUD <span className="fw-normal">/ Day</span>
+                  </h3>
+                )}
               </div>
             </div>
             <div className="row ">
@@ -78,7 +105,11 @@ function ListingDetails() {
                 <AvatarImage />
               </div>
               <div className="col text-start h-100">
-                <h3 className="text-capitalize fs-6 mb-0">owned by Billy Bob</h3>
+                {listingOwner.firstName && (
+                  <h3 className="text-capitalize fs-6 mb-0">
+                    owned by {listingOwner.firstName} {listingOwner.lastName}
+                  </h3>
+                )}
               </div>
             </div>
             <div className="row mb-3">
@@ -88,11 +119,7 @@ function ListingDetails() {
             </div>
             <div className="row">
               <div className="col">
-                <p className="mb-0">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam consectetur harum
-                  non. Quisquam consectetur eaque ducimus minus pariatur veritatis qui reiciendis
-                  magnam, saepe nisi soluta maiores, optio in porro ad.
-                </p>
+                <p className="mb-0">{listing.description}</p>
               </div>
             </div>
             <div className="row my-3">
@@ -104,6 +131,25 @@ function ListingDetails() {
               <div className="col">
                 <h2 className="fs-3">Select Pickup Date</h2>
                 <p className="mb-0 fs-6 text-muted">Add your usage dates for exact pricing</p>
+              </div>
+            </div>
+            <div className="row mb-5">
+              <div className="col">
+                <DateRangePicker
+                  startDate={dates.startDate}
+                  startDateId="unique-start-date"
+                  endDateId="unique-end-date"
+                  endDate={dates.endDate}
+                  onDatesChange={(selectedDates) => {
+                    setDates(selectedDates);
+                  }}
+                  focusedInput={focusedInput}
+                  onFocusChange={(currentFocusedInput) => setFocusedInput(currentFocusedInput)}
+                  initialVisibleMonth={() => moment()}
+                  numberOfMonths={1}
+                  hideKeyboardShortcutsPanel
+                  isDayBlocked={() => moment().isBefore()}
+                />
               </div>
             </div>
           </div>
