@@ -39,13 +39,13 @@ UserRole.hasMany(User, {
 });
 
 // User and Location Model Relationships
-User.belongsTo(Location, {
-  foreignKey: 'location_id',
-});
-
 Location.hasMany(User, {
   foreignKey: 'location_id',
-  onDelete: 'SET NULL',
+  onDelete: 'CASCADE',
+});
+
+User.belongsTo(Location, {
+  foreignKey: 'location_id',
 });
 
 // User and Booking Model Relationships
@@ -89,7 +89,7 @@ Listing.belongsTo(PriceInterval, {
 // Listing and Location Relationships
 Location.hasMany(Listing, {
   foreignKey: 'location_id',
-  onDelete: 'SET NULL',
+  onDelete: 'CASCADE',
 });
 
 Listing.belongsTo(Location, {

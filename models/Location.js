@@ -16,11 +16,15 @@ Location.init(
       allowNull: false,
     },
     postal_code: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    geometry: {
-      type: DataTypes.GEOMETRY('POINT'),
+    lat: {
+      type: DataTypes.DECIMAL(10, 8),
+      allowNull: false,
+    },
+    long: {
+      type: DataTypes.DECIMAL(11, 8),
       allowNull: false,
     },
   },

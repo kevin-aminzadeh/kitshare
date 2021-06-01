@@ -35,7 +35,7 @@ User.init(
       allowNull: false,
     },
     mobile: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     email: {
       type: DataTypes.STRING,

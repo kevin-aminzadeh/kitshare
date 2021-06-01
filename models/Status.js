@@ -21,7 +21,7 @@ Status.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Status',
+    modelName: 'status',
   }
 );
 
