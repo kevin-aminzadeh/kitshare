@@ -1,7 +1,7 @@
 {
-  "name": "rentr-frontend",
+  "name": "kitshare-frontend",
   "version": "0.1.0",
-  "description": "Rentr frontend application package",
+  "description": "Kitshare frontend application package",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
