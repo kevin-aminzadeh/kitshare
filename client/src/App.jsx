@@ -18,7 +18,7 @@ function App() {
           <Route exact path="/listings/lenses" component={Listings} />
           <Route exact path="/listings/lighting" component={Listings} />
           <Route exact path="/listings/audio" component={Listings} />
-          <Route path="/listings/1" component={ListingDetails} />
+          <Route path="/listings/:id" component={ListingDetails} />
           <Route path="*" component={LandingPage} />
         </Switch>
       </div>
