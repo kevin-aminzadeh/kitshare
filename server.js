@@ -1,12 +1,12 @@
 const express = require('express');
 const session = require('express-session');
+// Configure Sequelize Session Store
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// Import API Router
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-// Configure Sequelize Session Store
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Import Sequelize Connection Config
 const sequelize = require('./config/connection');
@@ -37,7 +37,7 @@ app.use(session(sess));
 app.use(routes);
 
 if (process.env.NODE_ENV !== 'test') {
-  sequelize.sync({ force: false }).then(() => {
+  sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => {
       console.log(`🌎 ==> API server now on port ${PORT}!`);
     });
