@@ -1,19 +1,16 @@
 const sequelize = require('../config/connection');
-const seedBooking = require('./seedBooking');
-const seedListing = require('./seedListing');
 const seedLocation = require('./seedLocation');
-const seedPaymentMethod = require('./seedPaymentMethod');
 const seedPriceInterval = require('./seedPriceInterval');
 const seedStatus = require('./seedStatus');
-const seedUser = require('./seedUser');
 const seedUserRole = require('./seedUserRole');
+const seedUser = require('./seedUser');
+const seedListing = require('./seedListing');
 
 const seedAll = async () => {
-  await sequelize.sync({ force: false });
+  await sequelize.sync({ force: true });
 
   // Seed Tables With No Foreign Keys
   await seedLocation();
-  await seedPaymentMethod();
   await seedPriceInterval();
   await seedStatus();
   await seedUserRole();
@@ -21,7 +18,6 @@ const seedAll = async () => {
   // Seed Interdependent Tables In Correct Order
   await seedUser();
   await seedListing();
-  await seedBooking();
 
   process.exit(0);
 };
