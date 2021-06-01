@@ -45,10 +45,7 @@ function ListingCard({
             <Link className="text-decoration-none text-dark" to={url}>
               <div className="carousel-inner h-100">
                 <div className="carousel-item h-100 active">
-                  <ImageCard
-                    isSquare={false}
-                    imageSrc="https://static.bhphoto.com/images/images500x500/1561852319_1274705.jpg"
-                  />
+                  <ImageCard isSquare={false} />
                 </div>
                 <div className="carousel-item">
                   <ImageCard isSquare={false} />
@@ -103,7 +100,7 @@ ListingCard.propTypes = {
   ratingCount: PropTypes.number.isRequired,
   distanceCount: PropTypes.number.isRequired,
   distanceUnit: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   currencyCode: PropTypes.string.isRequired,
   currencySymb: PropTypes.string.isRequired,
   priceInterval: PropTypes.string.isRequired,

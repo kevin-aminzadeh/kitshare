@@ -28,7 +28,8 @@ ImageCard.propTypes = {
 ImageCard.defaultProps = {
   isSquare: true,
   rounded: true,
-  imageSrc: 'https://static.bhphoto.com/images/images500x500/1561852319_1274705.jpg',
+  imageSrc:
+    'https://github.com/kevin-aminzadeh/bootstrap-responsive-portfolio/blob/main/dist/assets/img/projects/placeholder.png?raw=true',
 };
 
 export default ImageCard;

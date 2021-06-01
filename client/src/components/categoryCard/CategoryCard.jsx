@@ -49,7 +49,8 @@ CategoryCard.propTypes = {
 // Declare Default Prop Values
 CategoryCard.defaultProps = {
   title: '',
-  imageSrc: './assets/images/2da67c1c-0c61-4629-8798-1d4de1ac9291.webp',
+  imageSrc:
+    'https://github.com/kevin-aminzadeh/bootstrap-responsive-portfolio/blob/main/dist/assets/img/projects/placeholder.png?raw=true',
   imageAlt: '',
   mobileColWidth: 10,
   desktopColWidth: 3,
