@@ -13,7 +13,11 @@ exports.createListing = async (ListingData) => {
 exports.getAll = async () => {
   try {
     const dbData = await Listing.findAll();
-    return dbData;
+
+    // Extract Plain Data
+    const listings = dbData.map((listing) => listing.get({ plain: true }));
+
+    return listings;
   } catch (err) {
     return err;
   }

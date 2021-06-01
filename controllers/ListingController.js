@@ -41,7 +41,7 @@ exports.createListing = async (req, res) => {
 // Get All Listings
 exports.getAllListings = async (req, res) => {
   try {
-    const listings = ListingService.getAll();
+    const listings = await ListingService.getAll();
     res.status(200).json(listings);
   } catch (err) {
     res.status(400).json(err.toString());
