@@ -43,7 +43,7 @@ Booking.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: 'bookingStatus',
+        model: 'status',
         key: 'id',
       },
     },
