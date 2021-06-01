@@ -8,8 +8,16 @@ export default {
     return { data: listingsData, meta: { count: listingsData.length } };
   },
 
+  // Get Listing by ID
+  getListingbyId: async (id) => {
+    const response = await axios.get(`/api/listings/${id}`);
+    const listingData = response.data;
+    return listingData;
+  },
+
   // Save Book To Database
-  saveBook: (bookData) => axios.post('/api/books', bookData),
+  createListing: (listingData) => axios.post('/api/listings', listingData),
+
   // Delete Saved Book With Given ID
-  deleteSavedBook: (id) => axios.delete(`/api/books/${id}`),
+  deleteListing: (id) => axios.delete(`/api/listings/${id}`),
 };
