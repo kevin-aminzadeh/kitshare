@@ -1,4 +1,4 @@
-const { Listing } = require('../models/index');
+const { Listing, User, Location, PriceInterval } = require('../models/index');
 
 // Create New Listing in DB
 exports.createListing = async (ListingData) => {
@@ -10,6 +10,7 @@ exports.createListing = async (ListingData) => {
   }
 };
 
+// Get All Listings
 exports.getAll = async () => {
   try {
     const dbData = await Listing.findAll();
@@ -18,6 +19,42 @@ exports.getAll = async () => {
     const listings = dbData.map((listing) => listing.get({ plain: true }));
 
     return listings;
+  } catch (err) {
+    return err;
+  }
+};
+
+// Get Listing Record by ID
+exports.getById = async (id) => {
+  try {
+    const dbData = await Listing.findByPk(id, {
+      attributes: ['id', 'title', 'description', 'price'],
+      include: [
+        {
+          model: User,
+          as: 'owner',
+          attributes: ['first_name', 'last_name'],
+        },
+        {
+          model: PriceInterval,
+          attributes: ['name'],
+        },
+        {
+          model: Location,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    const plainData = dbData.get({ plain: true });
+
+    const listingData = {
+      ...plainData,
+      owner: { firstName: plainData.owner.first_name, lastName: plainData.owner.last_name },
+      priceInterval: plainData.priceInterval.name,
+      location: plainData.location.name,
+    };
+    return listingData;
   } catch (err) {
     return err;
   }

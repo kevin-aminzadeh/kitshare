@@ -41,8 +41,19 @@ exports.createListing = async (req, res) => {
 // Get All Listings
 exports.getAllListings = async (req, res) => {
   try {
-    const listings = await ListingService.getAll();
-    res.status(200).json(listings);
+    const listingsData = await ListingService.getAll();
+    res.status(200).json(listingsData);
+  } catch (err) {
+    res.status(400).json(err.toString());
+  }
+};
+
+// Get Single Listing
+exports.getListingById = async (req, res) => {
+  try {
+    const listingData = await ListingService.getById(req.params.id);
+    console.log(listingData);
+    res.status(200).json(listingData);
   } catch (err) {
     res.status(400).json(err.toString());
   }

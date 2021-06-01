@@ -9,6 +9,9 @@ router.post('/', () => {
 // Get All Listings
 router.get('/', ListingController.getAllListings);
 
+// Get Single Listing
+router.get('/:id', ListingController.getListingById);
+
 // Update Listing
 router.put('/', () => {
   console.log('Update listing');
