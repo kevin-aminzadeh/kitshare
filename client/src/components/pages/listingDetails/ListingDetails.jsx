@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import './react_dates_overrides.css';
 import { DateRangePicker } from 'react-dates';
 import moment from 'moment';
 import AvatarImage from '../../avatarImage/AvatarImage';
@@ -11,7 +12,7 @@ function ListingDetails() {
   const [listing, setListing] = useState({});
   const [listingOwner, setListingOwner] = useState({});
   const [dates, setDates] = useState({ startDate: null, endDate: null });
-  const defaultFocusedInput = 'startDate';
+  const defaultFocusedInput = null;
   const [focusedInput, setFocusedInput] = useState(defaultFocusedInput);
 
   const params = useParams();
@@ -127,9 +128,9 @@ function ListingDetails() {
                 <hr />
               </div>
             </div>
-            <div className="row mb-5">
+            <div className="row mb-4">
               <div className="col">
-                <h2 className="fs-3">Select Pickup Date</h2>
+                <h2 className="fs-3">Select Booking Dates</h2>
                 <p className="mb-0 fs-6 text-muted">Add your usage dates for exact pricing</p>
               </div>
             </div>
@@ -137,8 +138,8 @@ function ListingDetails() {
               <div className="col">
                 <DateRangePicker
                   startDate={dates.startDate}
-                  startDateId="unique-start-date"
-                  endDateId="unique-end-date"
+                  startDateId="start-date"
+                  endDateId="end-date"
                   endDate={dates.endDate}
                   onDatesChange={(selectedDates) => {
                     setDates(selectedDates);
@@ -149,7 +150,16 @@ function ListingDetails() {
                   numberOfMonths={1}
                   hideKeyboardShortcutsPanel
                   isDayBlocked={() => moment().isBefore()}
+                  required
+                  withPortal
                 />
+              </div>
+            </div>
+            <div className="row mb-5">
+              <div className="col-12">
+                <button type="button" className="btn btn-lg btn-primary rounded w-100">
+                  Make Booking
+                </button>
               </div>
             </div>
           </div>
