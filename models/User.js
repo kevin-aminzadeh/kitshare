@@ -65,14 +65,6 @@ User.init(
         key: 'id',
       },
     },
-    payment_method_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'paymentMethod',
-        key: 'id',
-      },
-    },
     location_id: {
       type: DataTypes.UUID,
       allowNull: false,
