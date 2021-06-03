@@ -17,16 +17,16 @@ function ListingDetails() {
 
   const params = useParams();
 
-  const fetchlistingData = async () => {
-    const listingData = await API.getListingbyId(params.id);
-    setListing(listingData);
-    setListingOwner(listingData.owner);
-  };
-
-  useEffect(async () => {
+  useEffect(() => {
     document.title = `Canon 5D Mark IV | Kitshare`;
 
-    await fetchlistingData();
+    async function fetchListingData() {
+      const listingData = await API.getListingbyId(params.id);
+      setListing(listingData);
+      setListingOwner(listingData.owner);
+    }
+
+    fetchListingData();
   }, []);
 
   return (
