@@ -13,6 +13,7 @@ User.init(
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      unique: true,
       allowNull: false,
       primaryKey: true,
     },
@@ -25,7 +26,7 @@ User.init(
       allowNull: true,
     },
     dob: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       validate: {
         isBefore: Date.now,
       },
@@ -60,6 +61,7 @@ User.init(
     role_id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: 'c35388e9-3776-4d24-9dac-790339a5a95a',
       references: {
         model: 'userRole',
         key: 'id',
