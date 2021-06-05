@@ -40,7 +40,9 @@ exports.getAllListings = async (req, res) => {
 // Get Single Listing
 exports.getListingById = async (req, res) => {
   try {
-    const listingData = await ListingService.getById(req.params.id);
+    const listingData = await ListingService.getById(req.params.id, {
+      attributes: ['id', 'title', 'description', 'price'],
+    });
     console.log(listingData);
     res.status(200).json(listingData);
   } catch (err) {
