@@ -25,10 +25,10 @@ exports.getAll = async () => {
 };
 
 // Get Listing Record by ID
-exports.getById = async (id) => {
+exports.getById = async (id, options = { attributes: [] }) => {
   try {
     const dbData = await Listing.findByPk(id, {
-      attributes: ['id', 'title', 'description', 'price'],
+      attributes: options.attributes,
       include: [
         {
           model: User,
