@@ -9,24 +9,13 @@ exports.createListing = async (req, res) => {
     }
 
     // If Request Data is Invalid, Reject Request
-    if (
-      !req.body.title ||
-      !req.body.description ||
-      !req.body.price ||
-      !req.body.priceIntervalId ||
-      !req.body.locationId ||
-      !req.body.ownerId
-    ) {
+    if (!req.body.title || !req.body.description || !req.body.price || !req.body.location_id) {
       throw Error('Invalid Request Data.');
     }
 
     // Create Listing Object
     const Listing = {
-      title: req.body.title,
-      description: req.body.description,
-      price: req.body.price,
-      price_interval_id: req.body.priceIntervalId,
-      location_id: req.body.locationId,
+      ...req.body,
       owner_id: req.session.userId,
     };
 
@@ -34,7 +23,7 @@ exports.createListing = async (req, res) => {
     await ListingService.createListing(Listing);
     res.status(200).json('Listing Created Successfully.');
   } catch (err) {
-    res.status(400).json(err.toString());
+    res.status(400).json({ Error: err.message });
   }
 };
 
@@ -44,7 +33,7 @@ exports.getAllListings = async (req, res) => {
     const listingsData = await ListingService.getAll();
     res.status(200).json(listingsData);
   } catch (err) {
-    res.status(400).json(err.toString());
+    res.status(400).json({ Error: err.message });
   }
 };
 
@@ -55,7 +44,7 @@ exports.getListingById = async (req, res) => {
     console.log(listingData);
     res.status(200).json(listingData);
   } catch (err) {
-    res.status(400).json(err.toString());
+    res.status(400).json({ Error: err.message });
   }
 };
 
@@ -88,7 +77,7 @@ exports.updateListing = async (req, res) => {
 
     res.status(200).json('Listing Successfully Updated');
   } catch (err) {
-    res.status(400).json(err.toString());
+    res.status(400).json({ Error: err.message });
   }
 };
 
@@ -110,6 +99,6 @@ exports.deleteListing = async (req, res) => {
 
     res.status(200).json('Listing Successfully Deleted');
   } catch (err) {
-    res.status(400).json(err.toString());
+    res.status(400).json({ Error: err.message });
   }
 };
