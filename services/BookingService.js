@@ -6,7 +6,7 @@ exports.createBooking = async (bookingData) => {
     const dbData = await Booking.create(bookingData);
     return dbData;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
@@ -20,7 +20,7 @@ exports.getAll = async () => {
 
     return bookings;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
@@ -59,7 +59,7 @@ exports.getById = async (id) => {
     };
     return BookingData;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
@@ -77,7 +77,7 @@ exports.updateBooking = async (BookingData) => {
     );
     return res;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
@@ -93,6 +93,6 @@ exports.deleteBooking = async (BookingId, userId) => {
     });
     return res;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
