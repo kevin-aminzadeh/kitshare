@@ -10,12 +10,7 @@ exports.createBooking = async (req, res) => {
     }
 
     // If Request Data is Invalid, Reject Request
-    if (
-      !req.body.time_from ||
-      !req.body.to_to ||
-      !req.body.interval_count ||
-      !req.body.listing_id
-    ) {
+    if (!req.body.time_from || !req.body.to_to || !req.body.listing_id) {
       throw Error('Invalid Request Data.');
     }
 
