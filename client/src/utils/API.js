@@ -15,9 +15,19 @@ export default {
     return listingData;
   },
 
-  // Save Book To Database
+  // Save Listing To Database
   createListing: (listingData) => axios.post('/api/listings', listingData),
 
   // Delete Saved Book With Given ID
   deleteListing: (id) => axios.delete(`/api/listings/${id}`),
+
+  // Create New Booking
+  createNewBooking: async (bookingData) => {
+    try {
+      const response = await axios.post('/api/bookings', bookingData);
+      return response;
+    } catch (err) {
+      return err;
+    }
+  },
 };
