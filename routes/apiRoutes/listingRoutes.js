@@ -2,9 +2,7 @@ const router = require('express').Router();
 const ListingController = require('../../controllers/ListingController');
 
 // Create New Listing
-router.post('/', () => {
-  console.log('Create new listing');
-});
+router.post('/', ListingController.createListing);
 
 // Get All Listings
 router.get('/', ListingController.getAllListings);
