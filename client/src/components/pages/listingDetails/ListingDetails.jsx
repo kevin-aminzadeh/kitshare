@@ -83,7 +83,9 @@ function ListingDetails() {
             <div className="row">
               <div className="col">
                 {Object.keys(listing) && (
-                  <h2 className="fs-6 fw-normal text-muted">Seacombe Heights, South Australia</h2>
+                  <h2 className="fs-6 fw-normal text-muted text-capitalize">
+                    {listing.location}, South Australia
+                  </h2>
                 )}
               </div>
             </div>
