@@ -17,6 +17,35 @@ function ListingDetails() {
 
   const params = useParams();
 
+  const isOutsideRange = (momentObject) => {
+    // Search array of bookings and determine if momentObject is in the range of any of the bookings
+    const reserved = listing.bookings.some((booking) =>
+      moment(momentObject).isBetween(
+        moment(booking.time_from),
+        moment(booking.time_to),
+        'days',
+        '[]'
+      )
+    );
+
+    // If momentObject is before current date OR falls in the reserved range of a booking, return true
+    if (moment(momentObject).isBefore(moment(), 'days') || reserved) {
+      return true;
+    }
+
+    // If momentObject is before the selected start date, return true
+    if (momentObject.isBefore(dates.startDate, 'days')) {
+      return true;
+    }
+
+    // Limit selection end date to the last day before a future booking's start date to stop selection of ranges which include booked out days
+    return listing.bookings.some(
+      (booking) =>
+        moment(momentObject).isAfter(moment(booking.time_from), 'days', '[]') &&
+        moment(booking.time_from).isAfter(moment(dates.startDate), 'days', '[]')
+    );
+  };
+
   useEffect(() => {
     document.title = `Canon 5D Mark IV | Kitshare`;
 
@@ -146,14 +175,20 @@ function ListingDetails() {
                   onDatesChange={(selectedDates) => {
                     setDates(selectedDates);
                   }}
+                  readOnly
                   focusedInput={focusedInput}
                   onFocusChange={(currentFocusedInput) => setFocusedInput(currentFocusedInput)}
                   initialVisibleMonth={() => moment()}
                   numberOfMonths={1}
+                  minDate={moment()}
+                  maxDate={moment().add(1, 'year')}
                   hideKeyboardShortcutsPanel
-                  isDayBlocked={() => moment().isBefore()}
+                  enableOutsideDays={false}
+                  isOutsideRange={isOutsideRange}
                   required
+                  showClearDates
                   withPortal
+                  showDefaultInputIcon
                 />
               </div>
             </div>
