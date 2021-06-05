@@ -5,6 +5,7 @@ const seedStatus = require('./seedStatus');
 const seedUserRole = require('./seedUserRole');
 const seedUser = require('./seedUser');
 const seedListing = require('./seedListing');
+const seedBooking = require('./seedBooking');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -18,6 +19,7 @@ const seedAll = async () => {
   // Seed Interdependent Tables In Correct Order
   await seedUser();
   await seedListing();
+  await seedBooking();
 
   process.exit(0);
 };
