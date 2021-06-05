@@ -26,6 +26,7 @@ Listing.init(
     price_interval_id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: 'c62ce27a-d313-44c7-95f9-728f3c6dab5b',
       references: {
         model: 'priceInterval',
         key: 'id',
