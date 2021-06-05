@@ -6,7 +6,7 @@ exports.createListing = async (ListingData) => {
     const dbData = await Listing.create(ListingData);
     return dbData;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
@@ -56,7 +56,7 @@ exports.getById = async (id) => {
     };
     return listingData;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
@@ -74,7 +74,7 @@ exports.updateListing = async (ListingData) => {
     );
     return res;
   } catch (err) {
-    return err;
+    throw Error(err);
   }
 };
 
