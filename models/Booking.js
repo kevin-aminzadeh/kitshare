@@ -42,6 +42,7 @@ Booking.init(
     status_id: {
       type: DataTypes.UUID,
       allowNull: false,
+      defaultValue: '12cb1060-0ab9-4f03-a8a7-3433283db218',
       references: {
         model: 'status',
         key: 'id',
