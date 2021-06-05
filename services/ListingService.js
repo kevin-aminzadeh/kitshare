@@ -1,4 +1,4 @@
-const { Listing, User, Location, PriceInterval } = require('../models/index');
+const { Listing, User, Location, PriceInterval, Booking } = require('../models/index');
 
 // Create New Listing in DB
 exports.createListing = async (ListingData) => {
@@ -43,6 +43,7 @@ exports.getById = async (id, options = { attributes: [] }) => {
           model: Location,
           attributes: ['name'],
         },
+        { model: Booking, attributes: ['time_from', 'time_to'] },
       ],
     });
 
