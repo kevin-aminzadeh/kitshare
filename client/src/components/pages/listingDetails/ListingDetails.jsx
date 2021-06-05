@@ -1,50 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import './react_dates_overrides.css';
-import { DateRangePicker } from 'react-dates';
-import moment from 'moment';
+
 import AvatarImage from '../../avatarImage/AvatarImage';
 import API from '../../../utils/API';
+import DateRangePicker from '../../dateRangePicker/DateRangePicker';
 
 function ListingDetails() {
   const [listing, setListing] = useState({});
   const [listingOwner, setListingOwner] = useState({});
   const [dates, setDates] = useState({ startDate: null, endDate: null });
-  const defaultFocusedInput = null;
-  const [focusedInput, setFocusedInput] = useState(defaultFocusedInput);
 
   const params = useParams();
-
-  const isOutsideRange = (momentObject) => {
-    // Search array of bookings and determine if momentObject is in the range of any of the bookings
-    const reserved = listing.bookings.some((booking) =>
-      moment(momentObject).isBetween(
-        moment(booking.time_from),
-        moment(booking.time_to),
-        'days',
-        '[]'
-      )
-    );
-
-    // If momentObject is before current date OR falls in the reserved range of a booking, return true
-    if (moment(momentObject).isBefore(moment(), 'days') || reserved) {
-      return true;
-    }
-
-    // If momentObject is before the selected start date, return true
-    if (momentObject.isBefore(dates.startDate, 'days')) {
-      return true;
-    }
-
-    // Limit selection end date to the last day before a future booking's start date to stop selection of ranges which include booked out days
-    return listing.bookings.some(
-      (booking) =>
-        moment(momentObject).isAfter(moment(booking.time_from), 'days', '[]') &&
-        moment(booking.time_from).isAfter(moment(dates.startDate), 'days', '[]')
-    );
-  };
 
   useEffect(() => {
     document.title = `Canon 5D Mark IV | Kitshare`;
@@ -159,43 +125,11 @@ function ListingDetails() {
                 <hr />
               </div>
             </div>
-            <div className="row mb-4">
-              <div className="col">
-                <h2 className="fs-3">Select Booking Dates</h2>
-                <p className="mb-0 fs-6 text-muted">Add your usage dates for exact pricing</p>
-              </div>
-            </div>
-            <div className="row mb-5">
-              <div className="col">
-                <DateRangePicker
-                  startDate={dates.startDate}
-                  startDateId="start-date"
-                  endDateId="end-date"
-                  endDate={dates.endDate}
-                  onDatesChange={(selectedDates) => {
-                    setDates(selectedDates);
-                  }}
-                  readOnly
-                  focusedInput={focusedInput}
-                  onFocusChange={(currentFocusedInput) => setFocusedInput(currentFocusedInput)}
-                  initialVisibleMonth={() => moment()}
-                  numberOfMonths={1}
-                  minDate={moment()}
-                  maxDate={moment().add(1, 'year')}
-                  hideKeyboardShortcutsPanel
-                  enableOutsideDays={false}
-                  isOutsideRange={isOutsideRange}
-                  required
-                  showClearDates
-                  withPortal
-                  showDefaultInputIcon
-                />
-              </div>
-            </div>
+            <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
             <div className="row mb-5">
               <div className="col-12">
                 <button type="button" className="btn btn-lg btn-primary rounded w-100">
-                  Make Booking
+                  Check Availability
                 </button>
               </div>
             </div>
