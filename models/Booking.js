@@ -12,11 +12,11 @@ Booking.init(
       primaryKey: true,
     },
     time_from: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     time_to: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     price_total: {
