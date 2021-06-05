@@ -14,8 +14,23 @@ exports.createBooking = async (req, res) => {
       throw Error('Invalid Request Data.');
     }
 
+    // Calculate Booking Total
+    const timeFrom = new Date(req.body.time_from);
+    const timeTo = new Date(req.body.time_to);
+    const differenceInTime = (timeTo.getTime() - timeFrom.getTime()) / (1000 * 3600 * 24);
+    const listingSummary = await ListingService.getById(req.body.listing_id, {
+      attributes: ['price'],
+    });
+    const bookingTotal = differenceInTime * listingSummary.price;
+
     // Create Booking Object
-    const Booking = { ...req.body };
+    const Booking = {
+      ...req.body,
+      time_from: timeFrom,
+      time_to: timeTo,
+      customer_id: req.session.userId,
+      price_total: bookingTotal,
+    };
 
     // Create Booking in DB
     await BookingService.createBooking(Booking);
