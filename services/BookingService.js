@@ -1,4 +1,4 @@
-const { Booking, User, Location, PriceInterval } = require('../models/index');
+const { Booking, User, Location, PriceInterval, Listing } = require('../models/index');
 
 // Create New Booking in DB
 exports.createBooking = async (bookingData) => {
@@ -11,9 +11,30 @@ exports.createBooking = async (bookingData) => {
 };
 
 // Get All Bookings
-exports.getAll = async () => {
+exports.getAll = async (userId) => {
   try {
-    const dbData = await Booking.findAll();
+    const dbData = await Booking.findAll({
+      where: { customer_id: userId },
+
+      attributes: ['id', 'time_from', 'time_to', 'price_total'],
+      include: [
+        {
+          model: Listing,
+          attributes: ['id', 'title'],
+          include: [
+            {
+              model: User,
+              as: 'owner',
+              attributes: ['id', 'first_name', 'last_name'],
+            },
+            {
+              model: Location,
+              attributes: ['id', 'name', 'postal_code', 'lat', 'long'],
+            },
+          ],
+        },
+      ],
+    });
 
     // Extract Plain Data
     const bookings = dbData.map((booking) => booking.get({ plain: true }));
