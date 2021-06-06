@@ -129,7 +129,7 @@ function ListingDetails() {
             <div className="row mb-5">
               <div className="col-12">
                 <button type="button" className="btn btn-lg btn-primary rounded w-100">
-                  Check Availability
+                  {dates.startDate && dates.endDate ? 'Reserve' : 'Check Availability'}
                 </button>
               </div>
             </div>
