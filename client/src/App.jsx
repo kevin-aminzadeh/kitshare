@@ -8,6 +8,7 @@ import ListingDetails from './components/pages/listingDetails/ListingDetails';
 import { AuthProvider } from './utils/authContext';
 import Login from './components/pages/login/Login';
 import API from './utils/API';
+import Bookings from './components/pages/bookings/Bookings';
 
 function App() {
   const [userState, setUserState] = useState({});
@@ -29,6 +30,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
+            <Route exact path="/bookings" component={Bookings} />
             <Route exact path="/listings" component={Listings} />
             <Route exact path="/listings/cameras" component={Listings} />
             <Route exact path="/listings/lenses" component={Listings} />
