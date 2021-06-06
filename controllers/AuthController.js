@@ -18,11 +18,14 @@ exports.register = async (req, res) => {
 
     // Update User's Session Data
     req.session.save(() => {
-      req.session.userId = userData.id;
-      req.session.userRole = userData.role;
+      req.session.user = {
+        id: userData.id,
+        firstName: userData.first_name,
+        lastName: userData.last_name,
+        roleId: userData.role_id,
+        isVerified: true,
+      };
       req.session.loggedIn = true;
-      req.session.isVerified = true;
-      req.session.userFirstName = userData.firstName;
       res.status(201).json('User Account Created Successfully.');
     });
   } catch (err) {
@@ -44,7 +47,7 @@ exports.logIn = async (req, res) => {
     }
 
     // Fetch User Record From AuthService
-    const userData = await AuthService.getUserByEmail(req.body.email);
+    const userData = await AuthService.getUserByPropertyValue('email', req.body.email);
 
     // Run Password Validation Check
     const validPassword = await userData.checkPassword(req.body.password);
@@ -56,15 +59,35 @@ exports.logIn = async (req, res) => {
 
     // Update User's Session Data
     req.session.save(() => {
-      req.session.userId = userData.id;
-      req.session.userRole = userData.role_id;
+      req.session.user = {
+        id: userData.id,
+        firstName: userData.first_name,
+        lastName: userData.last_name,
+        roleId: userData.role_id,
+        isVerified: true,
+      };
       req.session.loggedIn = true;
-      req.session.isVerified = true;
-      req.session.userFirstName = userData.first_name;
-      res.status(200).json('Login Successful.');
+
+      res.status(200).json({ message: 'Login Successful.', user: req.session.user });
     });
   } catch (err) {
     res.status(400).send(err.toString());
+  }
+};
+
+// Send Back User's Session Data
+exports.getSessionData = async (req, res) => {
+  try {
+    // If User is Logged In, Return User Object from Session
+    if (req.session.loggedIn) {
+      res.status(200).json({ loggedIn: req.session.loggedIn, user: req.session.user });
+    }
+    // Else Return "loggedIn: false"
+    else {
+      res.status(200).json({ loggedIn: false });
+    }
+  } catch (err) {
+    res.status(400).send(err);
   }
 };
 
