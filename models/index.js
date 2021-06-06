@@ -56,6 +56,7 @@ User.hasMany(Booking, {
 
 Booking.belongsTo(User, {
   foreignKey: 'customer_id',
+  as: 'customer',
 });
 
 // Booking and Listing Relationships
