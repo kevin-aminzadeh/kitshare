@@ -30,4 +30,35 @@ export default {
       return err;
     }
   },
+
+  // Log User In
+  login: async (credentials) => {
+    try {
+      const response = await axios.post('/api/auth/login', credentials);
+      console.log(response);
+      return response;
+    } catch (err) {
+      throw Error(err);
+    }
+  },
+
+  // Check Server-Side Session To Determine if User is Logged In
+  checkSession: async () => {
+    try {
+      const response = await axios.get('api/auth/session');
+
+      return response.data;
+    } catch (err) {
+      throw Error(err);
+    }
+  },
+
+  logout: async () => {
+    try {
+      const response = await axios.post('api/auth/logout');
+      return response;
+    } catch (err) {
+      throw Error(err);
+    }
+  },
 };
