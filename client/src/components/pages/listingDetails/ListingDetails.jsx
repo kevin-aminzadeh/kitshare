@@ -128,7 +128,7 @@ function ListingDetails() {
             <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
             <div className="row mb-5">
               <div className="col-12">
-                <button type="button" className="btn btn-lg btn-primary rounded w-100">
+                <button type="button" className="btn btn-lg btn-primary rounded-3 w-100">
                   {dates.startDate && dates.endDate ? 'Reserve' : 'Check Availability'}
                 </button>
               </div>
