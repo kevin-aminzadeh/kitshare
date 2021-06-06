@@ -35,7 +35,6 @@ export default {
   login: async (credentials) => {
     try {
       const response = await axios.post('/api/auth/login', credentials);
-      console.log(response);
       return response;
     } catch (err) {
       throw Error(err);
@@ -53,6 +52,7 @@ export default {
     }
   },
 
+  // Log User Out
   logout: async () => {
     try {
       const response = await axios.post('api/auth/logout');
