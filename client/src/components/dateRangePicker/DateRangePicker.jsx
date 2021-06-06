@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes, { instanceOf } from 'prop-types';
 import 'react-dates/initialize';
 import { START_DATE } from 'react-dates/constants';
-import 'react-dates/lib/css/_datepicker.css';
+import './datePicker.css';
+
 import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 
@@ -77,7 +78,7 @@ function DateRangePicker({ bookings, dates, setDates }) {
         </div>
       </div>
       <div className="row mb-5">
-        <div className="col">
+        <div className="col d-flex justify-content-center text-center">
           <DayPickerRangeController
             startDate={dates.startDate}
             endDate={dates.endDate}
