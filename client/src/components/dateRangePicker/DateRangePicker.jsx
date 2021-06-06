@@ -49,21 +49,23 @@ function DateRangePicker({ bookings, dates, setDates }) {
 
   const clearDateSelection = () => {
     setDates({ startDate: null, endDate: null });
+    setFocusedInput(defaultFocusedInput);
   };
 
-  const renderControls = () => {
-    if (!dates.startDate || !dates.endDate) {
-      return '';
-    }
-
-    return (
-      <section className="calendar_controls">
-        <button className="btn btn-link link-dark" type="button" onClick={clearDateSelection}>
-          Clear dates
-        </button>
-      </section>
-    );
-  };
+  const renderControls = () => (
+    <section
+      className="calendar_controls h-100"
+      style={
+        !dates.startDate && focusedInput !== 'endDate'
+          ? { visibility: 'hidden' }
+          : { visibility: 'visible' }
+      }
+    >
+      <button className="btn btn-link link-dark" type="button" onClick={clearDateSelection}>
+        Clear dates
+      </button>
+    </section>
+  );
 
   return (
     <div className="container">
