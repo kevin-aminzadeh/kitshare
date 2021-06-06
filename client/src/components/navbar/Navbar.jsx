@@ -88,7 +88,11 @@ function Navbar() {
         role="navigation"
       >
         <div className="container">
-          <ul className="navbar-nav d-flex flex-row justify-content-around w-100">
+          <ul
+            className={`navbar-nav d-flex flex-row justify-content-around  mx-auto ${
+              currentUser.id ? 'w-100' : 'w-50'
+            }`}
+          >
             <li className="nav-item">
               <NavLink exact to="/" className="nav-link">
                 <div className="row d-flex flex-column justify-content-center align-items-center">
@@ -99,32 +103,42 @@ function Navbar() {
                 </div>
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/bookings" className="nav-link">
-                <div className="row d-flex flex-column justify-content-center align-items-center">
-                  <i className="fas fa-receipt fa-lg text-center mb-1" />
-                  <div className="fs-6">
-                    <small>Bookings</small>
+            {currentUser.id ? (
+              <li className="nav-item">
+                <NavLink to="/bookings" className="nav-link">
+                  <div className="row d-flex flex-column justify-content-center align-items-center">
+                    <i className="fas fa-receipt fa-lg text-center mb-1" />
+                    <div className="fs-6">
+                      <small>Bookings</small>
+                    </div>
                   </div>
-                </div>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/inbox" className="nav-link">
-                <div className="row d-flex flex-column justify-content-center align-items-center">
-                  <i className="fas fa-inbox fa-lg text-center mb-1" />
-                  <div className="fs-6">
-                    <small>Inbox</small>
+                </NavLink>
+              </li>
+            ) : (
+              ''
+            )}
+
+            {currentUser.id ? (
+              <li className="nav-item">
+                <NavLink to="/inbox" className="nav-link">
+                  <div className="row d-flex flex-column justify-content-center align-items-center">
+                    <i className="fas fa-inbox fa-lg text-center mb-1" />
+                    <div className="fs-6">
+                      <small>Inbox</small>
+                    </div>
                   </div>
-                </div>
-              </NavLink>
-            </li>
+                </NavLink>
+              </li>
+            ) : (
+              ''
+            )}
+
             <li className="nav-item">
-              <NavLink to="/profile" className="nav-link">
+              <NavLink to={currentUser.id ? '/profile' : '/login'} className="nav-link">
                 <div className="row d-flex flex-column justify-content-center align-items-center">
                   <i className="far fa-user fa-lg text-center mb-1" />
                   <div className="fs-6">
-                    <small>Profile</small>
+                    <small>{currentUser.id ? 'Profile' : 'Login'}</small>
                   </div>
                 </div>
               </NavLink>
