@@ -43,7 +43,11 @@ exports.createBooking = async (req, res) => {
 // Get All Bookings
 exports.getAllBookings = async (req, res) => {
   try {
-    const BookingsData = await BookingService.getAll();
+    if (!req.session.user) {
+      throw Error('You are not authorized to view this resource');
+    }
+
+    const BookingsData = await BookingService.getAll(req.session.user.id);
     res.status(200).json(BookingsData);
   } catch (err) {
     res.status(400).json(err.toString());
