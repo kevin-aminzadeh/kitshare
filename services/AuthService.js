@@ -9,11 +9,11 @@ exports.createUser = async (userData) => {
   }
 };
 
-exports.getUserByEmail = async (userEmail) => {
+exports.getUserByPropertyValue = async (propertyName, propertyValue) => {
   try {
     const userData = await User.findOne({
       where: {
-        email: userEmail,
+        [propertyName]: propertyValue,
       },
     });
     return userData;
