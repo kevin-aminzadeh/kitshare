@@ -44,7 +44,7 @@ export default {
   // Check Server-Side Session To Determine if User is Logged In
   checkSession: async () => {
     try {
-      const response = await axios.get('api/auth/session');
+      const response = await axios.get('/api/auth/session');
 
       return response.data;
     } catch (err) {
@@ -55,7 +55,7 @@ export default {
   // Log User Out
   logout: async () => {
     try {
-      const response = await axios.post('api/auth/logout');
+      const response = await axios.post('/api/auth/logout');
       return response;
     } catch (err) {
       throw Error(err);
