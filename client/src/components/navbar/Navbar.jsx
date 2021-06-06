@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../utils/authContext';
 
 function Navbar() {
+  const { currentUser } = useAuth();
+
   return (
     <div className="sticky-top">
       <nav className="navbar navbar-expand navbar-light bg-white shadow-sm py-3 py-xl-3 py-xxl-4 sticky-top">
@@ -24,40 +27,55 @@ function Navbar() {
             </div>
             <div className="col d-none d-xl-block">
               <div className="d-flex justify-content-end " id="navbarSupportedContent">
-                <ul className="navbar-nav mb-2 mb-lg-0">
-                  <li className="nav-item dropdown">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="/"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Hi, User
-                    </a>
-                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li>
-                        <a className="dropdown-item" href="/">
-                          Action
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="/">
-                          Another action
-                        </a>
-                      </li>
-                      <li>
-                        <hr className="dropdown-divider" />
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="/">
-                          Something else here
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+                {currentUser.id ? (
+                  <ul className="navbar-nav mb-2 mb-lg-0">
+                    <li className="nav-item dropdown">
+                      <a
+                        className="nav-link dropdown-toggle text-capitalize"
+                        href="/"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Hi, {currentUser.firstName}
+                      </a>
+                      <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                          <a className="dropdown-item" href="/">
+                            Action
+                          </a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="/">
+                            Another action
+                          </a>
+                        </li>
+                        <li>
+                          <hr className="dropdown-divider" />
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="/">
+                            Something else here
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="navbar-nav mb-2 mb-lg-0">
+                    <li className="nav-item">
+                      <NavLink to="login" className="nav-link text-dark">
+                        Sign up
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink to="login" className="nav-link">
+                        Login
+                      </NavLink>
+                    </li>
+                  </ul>
+                )}
               </div>
             </div>
           </div>
