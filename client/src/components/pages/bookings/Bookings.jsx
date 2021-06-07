@@ -1,8 +1,11 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useMdMediaQuery } from '../../../utils/mediaQueryHooks';
 import API from '../../../utils/API';
 import BookingCard from '../../bookingCard/BookingCard';
+import TopNav from '../../topNav/TopNav';
+import BottomNav from '../../bottomNav/BottomNav';
 
 function Bookings() {
   const tab = new URLSearchParams(useLocation().search).get('tab');
@@ -35,59 +38,64 @@ function Bookings() {
   }, []);
 
   return (
-    <div id="bookings" className="container my-4 pb-5">
-      <div className="row mb-5">
-        <div className="col">
-          <h1 className="fw-bolder">Bookings</h1>
-        </div>
-      </div>
-      <div className="row mb-4">
-        <div className="col">
-          <ul className="nav nav-tabs">
-            <li className="nav-item">
-              <NavLink
-                className="nav-link link-secondary"
-                exact
-                to="/bookings?tab=upcoming"
-                isActive={(match, location) => {
-                  if (!match) {
-                    return false;
-                  }
+    <>
+      {useMdMediaQuery() && <TopNav />}
 
-                  const searchParams = new URLSearchParams(location.search);
-                  return (
-                    (match.isExact && searchParams.get('tab') === 'upcoming') ||
-                    !searchParams.get('tab')
-                  );
-                }}
-              >
-                Upcoming
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className="nav-link link-secondary"
-                exact
-                to="/bookings?tab=past"
-                isActive={(match, location) => {
-                  if (!match) {
-                    return false;
-                  }
-
-                  const searchParams = new URLSearchParams(location.search);
-                  return match.isExact && searchParams.get('tab') === 'past';
-                }}
-              >
-                Past
-              </NavLink>
-            </li>
-          </ul>
+      <div id="bookings" className="container my-4 pb-5">
+        <div className="row mb-5">
+          <div className="col">
+            <h1 className="fw-bolder">Bookings</h1>
+          </div>
         </div>
+        <div className="row mb-4">
+          <div className="col">
+            <ul className="nav nav-tabs">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link link-secondary"
+                  exact
+                  to="/bookings?tab=upcoming"
+                  isActive={(match, location) => {
+                    if (!match) {
+                      return false;
+                    }
+
+                    const searchParams = new URLSearchParams(location.search);
+                    return (
+                      (match.isExact && searchParams.get('tab') === 'upcoming') ||
+                      !searchParams.get('tab')
+                    );
+                  }}
+                >
+                  Upcoming
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link link-secondary"
+                  exact
+                  to="/bookings?tab=past"
+                  isActive={(match, location) => {
+                    if (!match) {
+                      return false;
+                    }
+
+                    const searchParams = new URLSearchParams(location.search);
+                    return match.isExact && searchParams.get('tab') === 'past';
+                  }}
+                >
+                  Past
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ul className="list-group list-group-flush px-3">
+          <div className="row">{renderBookings(tab)}</div>
+        </ul>
       </div>
-      <ul className="list-group list-group-flush px-3">
-        <div className="row">{renderBookings(tab)}</div>
-      </ul>
-    </div>
+      {!useMdMediaQuery() && <BottomNav />}
+    </>
   );
 }
 
