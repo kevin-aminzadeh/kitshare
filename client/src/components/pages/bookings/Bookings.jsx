@@ -36,12 +36,12 @@ function Bookings() {
 
   return (
     <div id="bookings" className="container my-4 pb-5">
-      <div className="row px-3 mb-5">
+      <div className="row mb-5">
         <div className="col">
           <h1 className="fw-bolder">Bookings</h1>
         </div>
       </div>
-      <div className="row px-3 mb-4">
+      <div className="row mb-4">
         <div className="col">
           <ul className="nav nav-tabs">
             <li className="nav-item">
