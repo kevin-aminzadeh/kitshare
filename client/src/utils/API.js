@@ -34,7 +34,6 @@ export default {
   getAllBookings: async () => {
     try {
       const response = await axios.get('/api/bookings');
-      console.log(response.data);
       return response.data;
     } catch (err) {
       return err;
