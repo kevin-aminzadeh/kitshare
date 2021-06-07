@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LandingPage from './components/pages/landing/Landing';
-import Navbar from './components/navbar/Navbar';
 import Listings from './components/pages/listings/Listings';
 import ListingDetails from './components/pages/listingDetails/ListingDetails';
 import { AuthProvider } from './utils/authContext';
@@ -28,7 +27,6 @@ function App() {
     <AuthProvider user={userState}>
       <Router>
         <div className="App h-100 d-flex flex-column">
-          <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/bookings" component={Bookings} />
