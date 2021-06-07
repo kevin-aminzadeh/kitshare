@@ -9,6 +9,7 @@ import { AuthProvider } from './utils/authContext';
 import Login from './components/pages/login/Login';
 import API from './utils/API';
 import Bookings from './components/pages/bookings/Bookings';
+import Profile from './components/pages/profile/Profile';
 
 function App() {
   const [userState, setUserState] = useState({});
@@ -26,7 +27,7 @@ function App() {
   return (
     <AuthProvider user={userState}>
       <Router>
-        <div className="App">
+        <div className="App h-100 d-flex flex-column">
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/listings/audio" component={Listings} />
             <Route exact path="/listings/:id" component={ListingDetails} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/account-settings" component={Profile} />
           </Switch>
         </div>
       </Router>
