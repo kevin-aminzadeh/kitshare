@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../../utils/API';
-import AvatarImage from '../../avatarImage/AvatarImage';
+import AvatarImage from '../../core/avatarImage/AvatarImage';
 
 function Profile() {
   return (

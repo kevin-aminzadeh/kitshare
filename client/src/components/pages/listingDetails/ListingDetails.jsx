@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import AvatarImage from '../../avatarImage/AvatarImage';
+import AvatarImage from '../../core/avatarImage/AvatarImage';
 import API from '../../../utils/API';
 import DateRangePicker from '../../core/dateRangePicker/DateRangePicker';
 import TopNav from '../../core/topNav/TopNav';

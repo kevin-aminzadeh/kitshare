@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import BottomNav from '../../core/bottomNav/BottomNav';
-import CTA from '../../cta/CTA';
-import Nearby from '../../nearby/Nearby';
+import CTA from './cta/CTA';
+import Nearby from './nearby/Nearby';
 import TopNav from '../../core/topNav/TopNav';
 
 function LandingPage() {
