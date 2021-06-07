@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import ImageCard from '../imageCard/ImageCard';
+import ImageCard from '../core/imageCard/ImageCard';
 
 function BookingCard({ booking: { ...booking } }) {
   const timeFrom = moment(booking.time_from).format('DD MMM YYYY');
