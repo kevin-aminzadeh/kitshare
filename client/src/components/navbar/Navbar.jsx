@@ -134,7 +134,7 @@ function Navbar() {
             )}
 
             <li className="nav-item">
-              <NavLink to={currentUser.id ? '/profile' : '/login'} className="nav-link">
+              <NavLink to={currentUser.id ? '/account-settings' : '/login'} className="nav-link">
                 <div className="row d-flex flex-column justify-content-center align-items-center">
                   <i className="far fa-user fa-lg text-center mb-1" />
                   <div className="fs-6">
