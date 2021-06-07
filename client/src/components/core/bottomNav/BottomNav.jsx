@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useMdMediaQuery } from '../../utils/mediaQueryHooks';
-import { useAuth } from '../../utils/authContext';
+import { useMdMediaQuery } from '../../../utils/mediaQueryHooks';
+import { useAuth } from '../../../utils/authContext';
 
 const BottomNav = ({ children }) => {
   const { currentUser } = useAuth();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ListingCard from '../../listingCard/ListingCard';
 import API from '../../../utils/API';
-import TopNav from '../../topNav/TopNav';
+import TopNav from '../../core/topNav/TopNav';
 
 function Listings() {
   const [listingsState, setListingsState] = useState({});

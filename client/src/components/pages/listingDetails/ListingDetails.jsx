@@ -3,8 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import AvatarImage from '../../avatarImage/AvatarImage';
 import API from '../../../utils/API';
 import DateRangePicker from '../../core/dateRangePicker/DateRangePicker';
-import TopNav from '../../topNav/TopNav';
-import BottomNav from '../../bottomNav/BottomNav';
+import TopNav from '../../core/topNav/TopNav';
+import BottomNav from '../../core/bottomNav/BottomNav';
 
 function ListingDetails() {
   const [listing, setListing] = useState({});

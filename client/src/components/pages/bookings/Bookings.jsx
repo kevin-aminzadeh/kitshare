@@ -4,8 +4,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useMdMediaQuery } from '../../../utils/mediaQueryHooks';
 import API from '../../../utils/API';
 import BookingCard from '../../bookingCard/BookingCard';
-import TopNav from '../../topNav/TopNav';
-import BottomNav from '../../bottomNav/BottomNav';
+import TopNav from '../../core/topNav/TopNav';
+import BottomNav from '../../core/bottomNav/BottomNav';
 
 function Bookings() {
   const tab = new URLSearchParams(useLocation().search).get('tab');

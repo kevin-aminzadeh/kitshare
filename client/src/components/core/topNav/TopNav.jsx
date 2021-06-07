@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useMdMediaQuery } from '../../utils/mediaQueryHooks';
+import { useMdMediaQuery } from '../../../utils/mediaQueryHooks';
 import TopNavContentDesktop from './topNavContentDesktop/TopNavContentDesktop';
 
 const TopNav = ({ children }) =>

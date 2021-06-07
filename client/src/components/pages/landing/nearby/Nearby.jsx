@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryCard from '../categoryCard/CategoryCard';
+import CategoryCard from '../../../categoryCard/CategoryCard';
 import './scrollGallery.css';
 
 function Nearby() {
