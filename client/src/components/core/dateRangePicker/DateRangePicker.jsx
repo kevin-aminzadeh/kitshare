@@ -68,42 +68,28 @@ function DateRangePicker({ bookings, dates, setDates }) {
   );
 
   return (
-    <div className="container">
-      <div className="row mb-4">
-        <div className="col">
-          <h2 className="fs-3">Select {dates.startDate ? 'drop-off' : 'pick-up'} date</h2>
-          <p className="mb-0 fs-6 text-muted">
-            {dates.startDate && dates.endDate
-              ? `${dates.startDate.format('D MMMM YYYY')} - ${dates.endDate.format('D MMMM YYYY')}`
-              : 'Add your usage dates for exact pricing'}
-          </p>
-        </div>
-      </div>
-      <div className="row mb-5">
-        <div className="col d-flex justify-content-center text-center">
-          <DayPickerRangeController
-            startDate={dates.startDate}
-            endDate={dates.endDate}
-            onDatesChange={(selectedDates) => {
-              setDates(selectedDates);
-            }}
-            focusedInput={focusedInput}
-            onFocusChange={(currentFocusedInput) => {
-              setFocusedInput(currentFocusedInput || START_DATE);
-            }}
-            initialVisibleMonth={() => moment()}
-            numberOfMonths={1}
-            minDate={moment()}
-            maxDate={moment().add(1, 'year')}
-            hideKeyboardShortcutsPanel
-            enableOutsideDays={false}
-            isOutsideRange={isOutsideRange}
-            noBorder
-            renderCalendarInfo={renderControls}
-          />
-        </div>
-      </div>
-    </div>
+    <DayPickerRangeController
+      startDate={dates.startDate}
+      endDate={dates.endDate}
+      onDatesChange={(selectedDates) => {
+        setDates(selectedDates);
+      }}
+      focusedInput={focusedInput}
+      onFocusChange={(currentFocusedInput) => {
+        setFocusedInput(currentFocusedInput || START_DATE);
+      }}
+      initialVisibleMonth={() => moment()}
+      numberOfMonths={1}
+      minDate={moment()}
+      maxDate={moment().add(1, 'year')}
+      hideKeyboardShortcutsPanel
+      enableOutsideDays={false}
+      isOutsideRange={isOutsideRange}
+      daySize={100}
+      noBorder
+      renderDayContents={(dayContents) => <div className="dayContents">{dayContents.date()}</div>}
+      renderCalendarInfo={renderControls}
+    />
   );
 }
 
