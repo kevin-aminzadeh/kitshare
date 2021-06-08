@@ -888,3 +888,69 @@
 .DayPicker:first-child:first-child {
   width: 500px;
 }
+
+/* Overrides */
+.CalendarDay__default {
+  padding: 0px !important;
+  border: none;
+}
+
+.CalendarDay__default:hover,
+.CalendarDay__default:active {
+  background: none;
+  border: none;
+  border-radius: 50% !important;
+}
+
+.CalendarDay__default .dayContents {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative !important;
+}
+
+.CalendarDay__default .dayContents:hover {
+  border: 1.5px solid #212529;
+  border-radius: 100% !important;
+}
+
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background: #f8f9fa;
+  font-weight: bold;
+  border: none;
+}
+
+.CalendarDay__selected > .dayContents,
+.CalendarDay__selected:active > .dayContents {
+  border-radius: 100% !important;
+  background-color: #212529 !important;
+}
+
+.CalendarDay__selected_span {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.CalendarDay__hovered_span,
+.CalendarDay__hovered_span:hover {
+  background-color: #f8f9fa !important;
+  color: #212529;
+}
+
+.CalendarDay__blocked_out_of_range,
+.CalendarDay__blocked_out_of_range:active,
+.CalendarDay__blocked_out_of_range:hover {
+  text-decoration: line-through;
+  border: none;
+}
+
+.CalendarDay__blocked_out_of_range > .dayContents:hover {
+  border: none;
+}
