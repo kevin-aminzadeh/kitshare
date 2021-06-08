@@ -5,11 +5,13 @@ import API from '../../../utils/API';
 import DateRangePicker from '../../core/dateRangePicker/DateRangePicker';
 import TopNav from '../../core/topNav/TopNav';
 import BottomNav from '../../core/bottomNav/BottomNav';
+import Modal from '../../core/modal/Modal';
 
 function ListingDetails() {
   const [listing, setListing] = useState({});
   const [listingOwner, setListingOwner] = useState({});
   const [dates, setDates] = useState({ startDate: null, endDate: null });
+  const [isOpen, setOpen] = useState(false);
 
   const history = useHistory();
   const params = useParams();
@@ -28,27 +30,30 @@ function ListingDetails() {
 
   return (
     <>
-      <TopNav>
-        <div className="col">
-          <ul className="navbar-nav ">
-            <div className="w-100 d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
-                <li className="nav-item">
-                  <button
-                    type="button"
-                    onClick={() => history.goBack()}
-                    className="btn btn-link  text-dark"
-                  >
-                    <span>
-                      <i className="fas fa-chevron-left" />
-                    </span>
-                  </button>
-                </li>
+      {!isOpen && (
+        <TopNav>
+          <div className="col">
+            <ul className="navbar-nav ">
+              <div className="w-100 d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center">
+                  <li className="nav-item">
+                    <button
+                      type="button"
+                      onClick={() => history.goBack()}
+                      className="btn btn-link  text-dark"
+                    >
+                      <span>
+                        <i className="fas fa-chevron-left" />
+                      </span>
+                    </button>
+                  </li>
+                </div>
               </div>
-            </div>
-          </ul>
-        </div>
-      </TopNav>
+            </ul>
+          </div>
+        </TopNav>
+      )}
+
       <div className="container mt-5 pb-5">
         <div id="listingDetails">
           <div className="row">
@@ -148,23 +153,67 @@ function ListingDetails() {
                   <p className="mb-0">{listing.description}</p>
                 </div>
               </div>
+              <div className="row mb-5 w-100 justify-content-center">
+                <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
+              </div>
               <div className="row my-3">
                 <div className="col">
                   <hr />
                 </div>
               </div>
-              <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
-              <div className="row mb-5">
-                <div className="col-12">
-                  <button type="button" className="btn btn-lg btn-primary rounded-3 w-100">
-                    {dates.startDate && dates.endDate ? 'Reserve' : 'Check Availability'}
-                  </button>
+              <div className="row mb-4">
+                <div className="col">
+                  <h2 className="fs-3">Select {dates.startDate ? 'drop-off' : 'pick-up'} date</h2>
+                  <p className="mb-0 fs-6 text-muted">
+                    {dates.startDate && dates.endDate
+                      ? `${dates.startDate.format('D MMMM YYYY')} - ${dates.endDate.format(
+                          'D MMMM YYYY'
+                        )}`
+                      : 'Add your usage dates for exact pricing'}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="container-sm px-3 mt-4" />
+          <Modal isOpen={isOpen}>
+            <div className="container-fluid mt-4">
+              <div className="row justify-content-between mb-3">
+                <div className="col-auto">
+                  <button
+                    type="button"
+                    className="btn btn-link link-dark text-decoration-none fw-bold Close "
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>
+                      <i className="fas fa-times" />
+                    </span>
+                  </button>
+                </div>
+                <div className="col-auto">
+                  <button
+                    type="button"
+                    className="btn btn-link link-dark "
+                    onClick={() => setOpen(false)}
+                  >
+                    Clear dates
+                  </button>
+                </div>
+              </div>
+              <div className="row mb-4">
+                <div className="col">
+                  <h2 className="fs-3">Select {dates.startDate ? 'drop-off' : 'pick-up'} date</h2>
+                  <p className="mb-0 fs-6 text-muted">
+                    {dates.startDate && dates.endDate
+                      ? `${dates.startDate.format('D MMMM YYYY')} - ${dates.endDate.format(
+                          'D MMMM YYYY'
+                        )}`
+                      : 'Add your usage dates for exact pricing'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Modal>
         </div>
       </div>
       <BottomNav>
@@ -186,8 +235,12 @@ function ListingDetails() {
               </div>
             </div>
             <div className="col text-end">
-              <button type="button" className="btn btn-lg btn-primary rounded-3 px-4">
-                Reserve
+              <button
+                type="button"
+                className="btn btn-lg btn-primary rounded-3 px-4"
+                onClick={() => setOpen(true)}
+              >
+                {dates.startDate && dates.endDate ? 'Reserve' : 'Check Availability'}
               </button>
             </div>
           </div>
