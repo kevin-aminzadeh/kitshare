@@ -64,8 +64,8 @@ export default {
   // Log User Out
   logout: async () => {
     try {
-      await axios.post('/api/auth/logout');
-      window.location.assign('/');
+      const res = await axios.post('/api/auth/logout');
+      return res.data;
     } catch (err) {
       throw Error(err);
     }
