@@ -34,6 +34,7 @@ exports.register = async (req, res) => {
         id: userData.id,
         firstName: userData.first_name,
         lastName: userData.last_name,
+        stripeCustomerId: userData.stripe_customer_id,
         roleId: userData.role_id,
         isVerified: true,
       };
@@ -75,6 +76,7 @@ exports.logIn = async (req, res) => {
         id: userData.id,
         firstName: userData.first_name,
         lastName: userData.last_name,
+        stripeCustomerId: userData.stripe_customer_id,
         roleId: userData.role_id,
         isVerified: true,
       };
