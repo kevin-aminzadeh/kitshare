@@ -97,11 +97,13 @@ function Listings() {
       <div className="container my-4 pb-5" id="listings">
         <div className="row px-3 mb-2">
           <div className="col">
-            <h1 className="fs-2">300+ listings</h1>
+            <h1 className="fs-2">
+              {listingsState.data ? `${listingsState.data.length} listings` : ''}{' '}
+            </h1>
           </div>
         </div>
         <ul className="list-group list-group-flush">
-          <div className="row">{renderListings()}</div>
+          <div className="row mb-5">{renderListings()}</div>
         </ul>
       </div>
       <BottomNav />
