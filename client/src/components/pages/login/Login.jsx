@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import API from '../../../utils/API';
 import { useAuth } from '../../../utils/authContext';
@@ -7,6 +8,8 @@ function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
 
   const { setCurrentUser } = useAuth();
+
+  const history = useHistory();
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -22,6 +25,7 @@ function Login() {
     if (responseStatus === 200) {
       const { user } = await API.checkSession();
       setCurrentUser(user);
+      history.goBack();
     }
   };
 
