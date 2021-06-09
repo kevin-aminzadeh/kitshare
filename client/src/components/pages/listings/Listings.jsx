@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ListingCard from '../../listingCard/ListingCard';
 import API from '../../../utils/API';
 import TopNav from '../../core/topNav/TopNav';
+import BottomNav from '../../core/bottomNav/BottomNav';
 
 function Listings() {
   const [listingsState, setListingsState] = useState({});
@@ -103,6 +104,7 @@ function Listings() {
           <div className="row">{renderListings()}</div>
         </ul>
       </div>
+      <BottomNav />
     </>
   );
 }
