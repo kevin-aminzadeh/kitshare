@@ -5,10 +5,10 @@ function CTA() {
   return (
     <div className="container px-4 position-relative mb-5">
       <div className="row">
-        <div className="col p-0 position-relative overflow-hidden" style={{ minHeight: '300px' }}>
+        <div className="col p-0 position-relative overflow-hidden" style={{ height: '400px' }}>
           <picture>
             <img
-              src="./assets/images/2da67c1c-0c61-4629-8798-1d4de1ac9291.webp"
+              src="https://picsum.photos/seed/picsum/200/300"
               alt=""
               className="rounded-3"
               style={{ objectFit: 'cover', verticalAlign: 'bottom', width: '100%', height: '100%' }}
