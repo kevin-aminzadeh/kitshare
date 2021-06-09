@@ -56,8 +56,8 @@ function ListingDetails() {
 
       <div className="container mt-5 pb-5">
         <div id="listingDetails">
-          <div className="row">
-            <div className="col-12 col-lg-6">
+          <div className="row justify-content-center">
+            <div className="col-12 col-lg-5 col-xl-5">
               <div
                 id="listingItemCarousel"
                 className="carousel slide h-100"
@@ -153,9 +153,6 @@ function ListingDetails() {
                   <p className="mb-0">{listing.description}</p>
                 </div>
               </div>
-              <div className="row mb-5 w-100 justify-content-center">
-                <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
-              </div>
               <div className="row my-3">
                 <div className="col">
                   <hr />
@@ -171,6 +168,24 @@ function ListingDetails() {
                         )}`
                       : 'Add your usage dates for exact pricing'}
                   </p>
+                </div>
+              </div>
+              <div className="row  w-100 justify-content-center">
+                <div className="col text-center">
+                  <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
+                </div>
+              </div>
+              <div className="row mb-5 w-100 justify-content-center">
+                <div className="col text-center mb-5">
+                  <button
+                    type="button"
+                    className="btn btn-primary py-3 rounded-3 px-4 w-100"
+                    onClick={() =>
+                      dates.startDate && dates.endDate ? console.log('payment') : setOpen(true)
+                    }
+                  >
+                    {dates.startDate && dates.endDate ? 'Reserve' : 'Check Availability'}
+                  </button>
                 </div>
               </div>
             </div>
@@ -212,6 +227,24 @@ function ListingDetails() {
                   </p>
                 </div>
               </div>
+              <div className="row  w-100 justify-content-center">
+                <div className="col text-center">
+                  <DateRangePicker bookings={listing.bookings} dates={dates} setDates={setDates} />
+                </div>
+              </div>
+              <div className="row mb-5 w-100 justify-content-center">
+                <div className="col-3 text-center mb-5">
+                  {dates.startDate && dates.endDate && (
+                    <button
+                      type="button"
+                      className="btn btn-outline-dark py-3 rounded-3 px-4 w-100"
+                      onClick={() => setOpen(false)}
+                    >
+                      Save
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           </Modal>
         </div>
@@ -221,24 +254,35 @@ function ListingDetails() {
           <div className="row align-items-center w-100 my-2">
             <div className="col">
               <div className="row">
-                <h6 className="h5 mb-0">
-                  $508.33
-                  <span className="fs-6 fw-light "> total</span>
-                </h6>
+                {dates.startDate && dates.endDate ? (
+                  <h6 className="h5 mb-0">
+                    ${(dates.endDate.diff(dates.startDate, 'days') * listing.price).toFixed(2)}
+                    <span className="fs-6 fw-light "> total</span>
+                  </h6>
+                ) : (
+                  <h6 className="h5 mb-0">
+                    ${listing.price}
+                    <span className="fs-6 fw-light "> / day</span>
+                  </h6>
+                )}
               </div>
               <div className="row">
-                <div className="col">
-                  <button type="button" className="btn btn-link link-dark fs-6 fw-bold p-0">
-                    3 Aug - 6 Aug
-                  </button>
+                <div className="col px-0 ps-2 px-sm-3">
+                  {dates.startDate && dates.endDate && (
+                    <span className="btn btn-link link-dark text-decoration-none fs-6 fw-bold p-0">
+                      {dates.startDate.format('DD MMM')} - {dates.endDate.format('DD MMM')}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
             <div className="col text-end">
               <button
                 type="button"
-                className="btn btn-lg btn-primary rounded-3 px-4"
-                onClick={() => setOpen(true)}
+                className="btn btn-primary py-3 rounded-3 px-4"
+                onClick={() =>
+                  dates.startDate && dates.endDate ? console.log('payment') : setOpen(true)
+                }
               >
                 {dates.startDate && dates.endDate ? 'Reserve' : 'Check Availability'}
               </button>
