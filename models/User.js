@@ -58,6 +58,11 @@ User.init(
       allowNull: false,
       defaultValue: false,
     },
+    stripe_customer_id: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
     role_id: {
       type: DataTypes.UUID,
       allowNull: false,
