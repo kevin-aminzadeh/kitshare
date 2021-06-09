@@ -1,4 +1,5 @@
-const AuthService = require('../services/AuthService');
+const UserService = require('../services/UserService');
+const { createStripeCustomer } = require('../services/StripeService');
 
 // Create New User
 exports.register = async (req, res) => {
@@ -13,8 +14,19 @@ exports.register = async (req, res) => {
       throw Error('Invalid Request. Please Provide All Required Information.');
     }
 
+    // Create a Stripe Customer Record For User
+    const stripeRes = await createStripeCustomer({
+      firstName: req.body.first_name,
+      lastName: req.body.last_name,
+      email: req.body.email,
+    });
+
     // Create User in DB
-    const userData = await AuthService.createUser({ ...req.body, dob: Date.parse(req.body.dob) });
+    const userData = await UserService.createUser({
+      ...req.body,
+      dob: Date.parse(req.body.dob),
+      stripe_customer_id: stripeRes.id,
+    });
 
     // Update User's Session Data
     req.session.save(() => {
@@ -46,8 +58,8 @@ exports.logIn = async (req, res) => {
       throw Error('Incorrect Email or Password, Please Try Again.');
     }
 
-    // Fetch User Record From AuthService
-    const userData = await AuthService.getUserByPropertyValue('email', req.body.email);
+    // Fetch User Record From UserService
+    const userData = await UserService.getUserByPropertyValue('email', req.body.email);
 
     // Run Password Validation Check
     const validPassword = await userData.checkPassword(req.body.password);
