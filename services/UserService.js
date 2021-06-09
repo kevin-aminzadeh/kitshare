@@ -21,3 +21,16 @@ exports.getUserByPropertyValue = async (propertyName, propertyValue) => {
     return err;
   }
 };
+
+exports.updateUser = async (userData) => {
+  try {
+    const res = await User.update(userData, {
+      where: {
+        id: userData.id,
+      },
+    });
+    return res;
+  } catch (err) {
+    return err;
+  }
+};
