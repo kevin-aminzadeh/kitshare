@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import PropTypes, { instanceOf } from 'prop-types';
 import 'react-dates/initialize';
 import { START_DATE } from 'react-dates/constants';
 import './datePicker.css';
-
 import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
+import {
+  useLgMediaQuery,
+  useMdMediaQuery,
+  useSmMediaQuery,
+  useXlMediaQuery,
+} from '../../../utils/mediaQueryHooks';
 
 function DateRangePicker({ bookings, dates, setDates }) {
   const defaultFocusedInput = START_DATE;
   const [focusedInput, setFocusedInput] = useState(defaultFocusedInput);
+  const [daySize, setDaySize] = useState(30);
+
+  const sm = useSmMediaQuery();
+  const md = useMdMediaQuery();
+  const lg = useLgMediaQuery();
+  const xl = useXlMediaQuery();
 
   const isOutsideRange = (momentObject) => {
     // Search array of bookings and determine if momentObject is in the range of any of the bookings
@@ -54,7 +66,7 @@ function DateRangePicker({ bookings, dates, setDates }) {
 
   const renderControls = () => (
     <section
-      className="calendar_controls h-100"
+      className="calendar_controls h-100 mb-4 mb-md-0"
       style={
         !dates.startDate && focusedInput !== 'endDate'
           ? { visibility: 'hidden' }
@@ -66,6 +78,20 @@ function DateRangePicker({ bookings, dates, setDates }) {
       </button>
     </section>
   );
+
+  useEffect(() => {
+    if (xl) {
+      setDaySize(40);
+    } else if (lg) {
+      setDaySize(95);
+    } else if (md) {
+      setDaySize(90);
+    } else if (sm) {
+      setDaySize(65);
+    } else {
+      setDaySize(32);
+    }
+  }, [sm, md, lg, xl]);
 
   return (
     <DayPickerRangeController
@@ -79,13 +105,13 @@ function DateRangePicker({ bookings, dates, setDates }) {
         setFocusedInput(currentFocusedInput || START_DATE);
       }}
       initialVisibleMonth={() => moment()}
-      numberOfMonths={1}
+      numberOfMonths={xl ? 2 : 1}
       minDate={moment()}
       maxDate={moment().add(1, 'year')}
       hideKeyboardShortcutsPanel
       enableOutsideDays={false}
       isOutsideRange={isOutsideRange}
-      daySize={100}
+      daySize={daySize}
       noBorder
       renderDayContents={(dayContents) => <div className="dayContents">{dayContents.date()}</div>}
       renderCalendarInfo={renderControls}
