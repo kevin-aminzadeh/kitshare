@@ -8,7 +8,6 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
-// import './cardSection.css';
 import Modal from '../core/modal/Modal';
 
 function NewPaymentModal() {
