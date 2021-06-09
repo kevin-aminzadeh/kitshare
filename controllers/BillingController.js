@@ -1,9 +1,3 @@
-const {
-  createPaymentIntent,
-  createStripeCustomer,
-  createSetupIntent,
-} = require('../services/StripeService');
-
 // Get User's Payment Methods
 exports.getPaymentMethods = async (req, res) => {
   try {
@@ -19,6 +13,7 @@ exports.getPaymentMethods = async (req, res) => {
 // Create New Payment Method
 exports.addNewPaymentMethod = async (req, res) => {
   try {
+    res.send('add new payment method');
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
