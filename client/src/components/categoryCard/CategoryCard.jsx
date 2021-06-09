@@ -12,7 +12,7 @@ function CategoryCard({ title, imageSrc, imageAlt, mobileColWidth, desktopColWid
 
   return (
     <div
-      className={`col-${mobileColWidth} col-lg-${desktopColWidth} h-100 px-2 position-relative overflow-hidden category-card`}
+      className={`col-${mobileColWidth} col-md-5 col-lg-${desktopColWidth} h-100 px-2 position-relative overflow-hidden category-card`}
     >
       <Link to={url} className="text-decoration-none text-dark">
         <div className="card-wrapper w-100 position-relative" style={{ paddingBottom: '100%' }}>
